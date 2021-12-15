@@ -1,0 +1,38 @@
+﻿@{
+    Employee Model = ViewData["Employee"] as Employee;
+    List<ToDo> toDos = ViewData["ToDos"] as List<ToDo>;
+}
+
+<h2>Details</h2>
+<div style="border: 2px solid red">
+    <p>ID: @Model.EmployeeID</p>
+    <p>Name: @Model.Name</p>
+    <p>Hours: @Model.Hours</p>
+    <p>Title: @Model.Title</p>
+</div>
+
+<h3>Tasks:</h3>
+@foreach(ToDo task in toDos)
+            {
+                <h4>Task: @task.Name</h4>
+                <div>
+                    <p>Description: @task.Description</p>
+                    <p>Assigned to: @Model.Name</p>
+                    <p>Hours needed: @task.HoursNeeded</p>
+                    <p>Completed?: </p>
+                    @if(task.IsCompleted == true)
+                        {
+                            <span>Yes</span>
+                        }
+                    else
+                        {
+                            <span>No</span>
+                        }
+                    <p></p>
+                </div>
+            }
+
+<p>
+    <a asp-controller="Employee" asp-action="UpdateUser" asp-route-id="@Model.EmployeeID">Update</a> |
+    <a asp-controller="Employee" asp-action="DeleteUser" asp-route-id="@Model.EmployeeID">Delete</a>
+</p>

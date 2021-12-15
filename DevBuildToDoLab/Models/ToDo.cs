@@ -11,9 +11,14 @@ namespace DevBuildToDoLab.Models
         [Key]
         public int ID { get; set; } = 0;
         public int AssignedTo { get; set; }
+
+        [MaxLength(20, ErrorMessage = "Task names must be 20 characters or less.")]
+        [RegularExpression(@"^.*\S.*$", ErrorMessage = "Name cannot be empty.")]
         public string Name { get; set; }
+
+        [MaxLength(100, ErrorMessage = "Descriptions must be 100 characters or less.")]
         public string Description { get; set; }
         public int HoursNeeded { get; set; }
-        public bool IsCompleted { get; set; }
+        public bool IsCompleted { get; set; } = false;
     }
 }

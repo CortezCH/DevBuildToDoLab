@@ -1,0 +1,32 @@
+﻿@model Employee
+
+<h1>Register User</h1>
+
+@using (Html.BeginForm("CreateUser", "Employee", FormMethod.Post))
+{
+    @Html.LabelFor(employee => employee.Name)
+    <br />
+    @Html.ValidationMessageFor(employee => employee.Name)
+    <br />
+    @Html.TextBoxFor(employee => employee.Name)
+
+    <br />
+
+    @Html.LabelFor(employee => employee.Title)
+    <br />
+    @Html.ValidationMessageFor(employee => employee.Title)
+    <br />
+    @Html.TextBoxFor(employee => employee.Title)
+
+    <br />
+
+    @Html.LabelFor(employee => employee.Hours)
+    <br />
+    @Html.ValidationMessageFor(employee => employee.Hours)
+    <br />
+    @Html.TextBoxFor(employee => employee.Hours)
+
+    <br />
+
+    <input type="submit" value="Register" />
+}

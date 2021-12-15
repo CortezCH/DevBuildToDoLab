@@ -11,12 +11,17 @@ namespace DevBuildToDoLab.Models
         [Key]
         public int EmployeeID { get; set; } = 0;
 
+        [Required(ErrorMessage = "This field is required")]
         [MaxLength(20, ErrorMessage = "Name Must be 20 characters or less")]
         public string Name { get; set; }
 
         [Range(0, 40, ErrorMessage = "Max of 40 hours. Not Enough Hours")]
         public int Hours { get; set; }
 
-        List<ToDo> toDos = new List<ToDo>();
+        [Required(ErrorMessage = "This field is required")]
+        [MaxLength(40, ErrorMessage = "Title Must be 40 characters or less")]
+        public string Title { get; set; }
+
+        List<ToDo> ToDos { get; set; } = new List<ToDo>();
     }
 }

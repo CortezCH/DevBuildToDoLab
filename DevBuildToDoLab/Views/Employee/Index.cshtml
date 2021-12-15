@@ -1,0 +1,20 @@
+﻿@model List<Employee>
+
+<h1>Employees</h1>
+@foreach(Employee m in Model)
+            {
+                <div style="border: 2px solid red">
+                    <p>ID: @m.EmployeeID</p>
+                    <p>Name: @m.Name</p>
+                    <p>Hours: @m.Hours</p>
+                    <p>Title: @m.Title</p>
+
+                    
+                        <a asp-controller="Employee" asp-action="Details" asp-route-EmployeeId="@m.EmployeeID">Details</a> |
+                        <a asp-controller="Employee" asp-action="UpdateUser" asp-route-EmployeeId="@m.EmployeeID">Details</a> |
+                        <a asp-controller="Employee" asp-action="DeleteUser" asp-route-EmployeeId="@m.EmployeeID">Details</a> |
+                    
+                </div>
+
+                
+            }

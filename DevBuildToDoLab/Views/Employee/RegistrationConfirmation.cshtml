@@ -1,0 +1,14 @@
+﻿@model Employee
+
+<h2>Employee Registered!</h2>
+<div style="border: 2px solid red">
+    <p>ID: @Model.EmployeeID</p>
+    <p>Name: @Model.Name</p>
+    <p>Hours: @Model.Hours</p>
+    <p>Title: @Model.Title</p>
+</div>
+
+<p>
+    <a asp-controller="Employee" asp-action="UpdateUser" asp-route-id="@Model.EmployeeID">Update</a> |
+    <a asp-controller="Employee" asp-action="DeleteUser" asp-route-id="@Model.EmployeeID">Delete</a>
+</p>
