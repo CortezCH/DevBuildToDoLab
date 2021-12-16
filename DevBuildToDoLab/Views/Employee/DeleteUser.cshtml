@@ -6,9 +6,13 @@
     <p>Hours: @Model.Hours</p>
     <p>Title: @Model.Title</p>
 </div>
+<p>Do you want to delete this Employee?</p>
+@using (Html.BeginForm("Index", "Employee"))
+{
+    <input type="submit" value="No "/>
+}
 
-<a style="display:inline; margin-right:5px" asp-controller="Employee" asp-action="Index">No</a>
-@using(Html.BeginForm("DeleteUser", "Employee", FormMethod.Post))
-            {
-                <input type="submit" value="Delete" asp-route-EmployeeID="@Model.EmployeeID"/>
-            }
+@using (Html.BeginForm("DeleteUser", "Employee", FormMethod.Post))
+{
+    <input type="submit" value="Yes" asp-route-EmployeeID="@Model.EmployeeID" />
+}

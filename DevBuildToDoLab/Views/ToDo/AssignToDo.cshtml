@@ -1,0 +1,27 @@
+﻿@model ToDo
+@{
+    List<Employee> employees = ViewData["Employees"] as List<Employee>;
+}
+
+<h1>Assign Task</h1>
+<h5>Task: @Model.Name</h5>
+@using (Html.BeginForm("AssignToDo", "ToDo", FormMethod.Post))
+{
+    <select name="AssignedTo">
+        <option value="0"></option>
+        @foreach (Employee em in employees)
+        {
+            @if (em.Hours >= Model.HoursNeeded)
+            {
+                <option value="@em.EmployeeID">@em.Name</option>
+            }
+        }
+    </select>
+
+    @Html.HiddenFor(m => m.ID)
+    @Html.HiddenFor(m => m.Name)
+    @Html.HiddenFor(m => m.Description)
+    @Html.HiddenFor(m => m.HoursNeeded)
+    @Html.HiddenFor(m => m.IsComplete)
+    <input type="submit" value="Assign" />
+}

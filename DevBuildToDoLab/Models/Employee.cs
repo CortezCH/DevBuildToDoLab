@@ -22,6 +22,6 @@ namespace DevBuildToDoLab.Models
         [MaxLength(40, ErrorMessage = "Title Must be 40 characters or less")]
         public string Title { get; set; }
 
-        List<ToDo> ToDos { get; set; } = new List<ToDo>();
+        
     }
 }

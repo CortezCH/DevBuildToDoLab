@@ -21,6 +21,19 @@ namespace DevBuildToDoLab.Models
                 return toDos;
             }
         }
+        
+        public ToDo GetToDo(int id)
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"SELECT * FROM ToDos WHERE ID = {id}";
+                connect.Open();
+                ToDo toDo = connect.Query<ToDo>(sql).ToList().First();
+                connect.Close();
+
+                return toDo;
+            }
+        }
 
         public List<ToDo> GetToDos(Employee employee)
         {
@@ -40,6 +53,44 @@ namespace DevBuildToDoLab.Models
             using (var connect = new MySqlConnection(Secret.Connection))
             {
                 string sql = $"INSERT INTO ToDos values(0, null, '{model.Name}', '{model.Description}', {model.HoursNeeded}, {model.IsComplete})";
+                connect.Open();
+                connect.Query<ToDo>(sql);
+                connect.Close();
+            }
+        }
+
+        public void DeleteToDo(int toDoId)
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"DELETE FROM ToDos where ID = {toDoId}";
+                connect.Open();
+                connect.Query<ToDo>(sql);
+                connect.Close();
+            }
+        }
+
+        public void UpdateToDo(ToDo model)
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"UPDATE ToDos SET " +
+                    $"ID = {model.ID}, " +
+                    $"`Name` = '{model.Name}', " +
+                    $"Description = '{model.Description}', " +
+                    $"HoursNeeded = {model.HoursNeeded}, " +
+                    $"IsComplete = {model.IsComplete}";
+                connect.Open();
+                connect.Query<ToDo>(sql);
+                connect.Close();
+            }
+        }
+
+        public void AssignToDo(ToDo model)
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"UPDATE ToDos SET AssignedTo = {model.AssignedTo}";
                 connect.Open();
                 connect.Query<ToDo>(sql);
                 connect.Close();

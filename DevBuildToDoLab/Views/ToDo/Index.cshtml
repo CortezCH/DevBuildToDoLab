@@ -1,4 +1,7 @@
 ﻿@model List<ToDo>
+@{ 
+    List<Employee> employees = ViewData["Employees"] as List<Employee>;
+}
 
 @foreach (ToDo task in Model)
 {
@@ -7,6 +10,14 @@
     <h4>Task: @task.Name</h4>
     <p>Description: @task.Description</p>
     <p>Hours needed: @task.HoursNeeded</p>
+    @if (task.AssignedTo != 0)
+    {
+        <p>Assigned To: @employees.Where(m => m.EmployeeID == task.AssignedTo).First().Name</p>
+    }
+    else
+    {
+        <p>Assigned To: N/A</p>
+    }
     <span>Completed?: </span>
     @if (task.IsComplete == true)
     {
@@ -20,16 +31,17 @@
     @if (task.AssignedTo != 0)
     {
         <p>
-            <a asp-controller="ToDo" asp-action="UpdateTask" asp-route-id="@task.ID">Update</a> |
-            <a asp-controller="ToDo" asp-action="DeleteTask" asp-route-id="@task.ID">Delete</a>
+            <a asp-controller="ToDo" asp-action="AssignToDo" asp-route-id="@task.ID">Re-Assign</a> |
+            <a asp-controller="ToDo" asp-action="UpdateToDo" asp-route-id="@task.ID">Update</a> |
+            <a asp-controller="ToDo" asp-action="DeleteToDo" asp-route-id="@task.ID">Delete</a>
         </p>
     }
     else
     {
         <p>
-            <a asp-controller="ToDo" asp-action="AssignTask" asp-route-id="@task.ID">Assign</a> |
-            <a asp-controller="ToDo" asp-action="UpdateTask" asp-route-id="@task.ID">Update</a> |
-            <a asp-controller="ToDo" asp-action="DeleteTask" asp-route-id="@task.ID">Delete</a>
+            <a asp-controller="ToDo" asp-action="AssignToDo" asp-route-id="@task.ID">Assign</a> |
+            <a asp-controller="ToDo" asp-action="UpdateToDo" asp-route-id="@task.ID">Update</a> |
+            <a asp-controller="ToDo" asp-action="DeleteToDo" asp-route-id="@task.ID">Delete</a>
         </p>
     }
 </div>
