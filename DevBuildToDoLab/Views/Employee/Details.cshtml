@@ -20,7 +20,7 @@
                     <p>Assigned to: @Model.Name</p>
                     <p>Hours needed: @task.HoursNeeded</p>
                     <p>Completed?: </p>
-                    @if(task.IsCompleted == true)
+                    @if(task.IsComplete == true)
                         {
                             <span>Yes</span>
                         }
@@ -33,6 +33,6 @@
             }
 
 <p>
-    <a asp-controller="Employee" asp-action="UpdateUser" asp-route-id="@Model.EmployeeID">Update</a> |
-    <a asp-controller="Employee" asp-action="DeleteUser" asp-route-id="@Model.EmployeeID">Delete</a>
+    <a asp-controller="Employee" asp-action="UpdateUser" asp-route-EmployeeId="@Model.EmployeeID">Update</a> |
+    <a asp-controller="Employee" asp-action="DeleteUser" asp-route-EmployeeId="@Model.EmployeeID">Delete</a>
 </p>

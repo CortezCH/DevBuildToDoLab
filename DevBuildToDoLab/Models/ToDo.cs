@@ -18,7 +18,9 @@ namespace DevBuildToDoLab.Models
 
         [MaxLength(100, ErrorMessage = "Descriptions must be 100 characters or less.")]
         public string Description { get; set; }
+
+        [Range(0, 40, ErrorMessage ="Hours needed must be between 1 and 40 hours")]
         public int HoursNeeded { get; set; }
-        public bool IsCompleted { get; set; } = false;
+        public bool IsComplete { get; set; } = false;
     }
 }

@@ -34,5 +34,16 @@ namespace DevBuildToDoLab.Models
                 return toDos;
             }
         }
+
+        public void CreateToDo(ToDo model)
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"INSERT INTO ToDos values(0, null, '{model.Name}', '{model.Description}', {model.HoursNeeded}, {model.IsComplete})";
+                connect.Open();
+                connect.Query<ToDo>(sql);
+                connect.Close();
+            }
+        }
     }
 }

@@ -10,5 +10,5 @@
 <a style="display:inline; margin-right:5px" asp-controller="Employee" asp-action="Index">No</a>
 @using(Html.BeginForm("DeleteUser", "Employee", FormMethod.Post))
             {
-                <input type="submit" value="Delete" />
+                <input type="submit" value="Delete" asp-route-EmployeeID="@Model.EmployeeID"/>
             }

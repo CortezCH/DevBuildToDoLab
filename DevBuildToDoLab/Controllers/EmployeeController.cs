@@ -43,7 +43,8 @@ namespace DevBuildToDoLab.Controllers
 
         public IActionResult UpdateUser(int employeeID)
         {
-            return View(EmployeeDAL.GetEmployee(employeeID));
+            Employee model = EmployeeDAL.GetEmployee(employeeID);
+            return View(model);
         }
 
         [HttpPost]
@@ -57,10 +58,10 @@ namespace DevBuildToDoLab.Controllers
             return View(model);
         }
 
-        public IActionResult DeleteUser(int modelID)
+        public IActionResult DeleteUser(int employeeID)
         {
-            Employee model = EmployeeDAL.GetEmployee(modelID);
-            return View();
+            Employee model = EmployeeDAL.GetEmployee(employeeID);
+            return View(model);
         }
 
         [HttpPost]
@@ -70,9 +71,9 @@ namespace DevBuildToDoLab.Controllers
             return RedirectToAction("Index", "Employee");
         }
 
-        public IActionResult Details(int ID)
+        public IActionResult Details(int employeeID)
         {
-            Employee model = EmployeeDAL.GetEmployee(ID);
+            Employee model = EmployeeDAL.GetEmployee(employeeID);
             ViewData["Employee"] = model;
             ViewData["ToDos"] = ToDoDAL.GetToDos(model);
             return View();

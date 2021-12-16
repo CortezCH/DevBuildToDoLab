@@ -35,6 +35,18 @@ namespace DevBuildToDoLab.Models
             }
         }
 
+        public List<String> GetEmployeesNames()
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"SELECT `Name` FROM Employee";
+                connect.Open();
+                List<String> names = connect.Query<String>(sql).ToList();
+                connect.Close();
+                return names;
+            }
+        }
+
         public void CreateUser(Employee model)
         {
             using (var connect = new MySqlConnection(Secret.Connection))
@@ -55,7 +67,7 @@ namespace DevBuildToDoLab.Models
             using (var connect = new MySqlConnection(Secret.Connection))
             {
                 string sql = $"UPDATE Employee " +
-                    $"SET `Name` = {model.Name}, Hours = {model.Hours}, Title = {model.Title} " +
+                    $"SET `Name` = '{model.Name}', Hours = {model.Hours}, Title = '{model.Title}' " +
                     $"WHERE EmployeeID = {model.EmployeeID}";
                 connect.Open();
                 connect.Query<Employee>(sql);

@@ -2,7 +2,7 @@
 
 <h1>Update User</h1>
 
-@using (Html.BeginForm("CreateUser", "Employee", FormMethod.Post))
+@using (Html.BeginForm("UpdateUser", "Employee", FormMethod.Post))
 {
     @Html.LabelFor(employee => employee.Name)
     <br />
@@ -27,6 +27,7 @@
     @Html.TextBoxFor(employee => employee.Hours)
 
     <br />
+    @Html.HiddenFor(employee => employee.EmployeeID)
 
-    <input type="submit" value="Register" />
+    <input type="submit" value="Update" />
 }
