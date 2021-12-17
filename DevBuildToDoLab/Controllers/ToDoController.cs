@@ -21,19 +21,22 @@ namespace DevBuildToDoLab.Controllers
 
         public IActionResult CreateToDo()
         {
-            //ViewData["Employees"] = EmployeeDAL.GetEmployeesNames();
+            ViewData["Employees"] = EmployeeDAL.GetEmployees();
             return View();
         }
 
         [HttpPost]
         public IActionResult CreateToDo(ToDo model)
         {
-            if (ModelState.IsValid)
+            Employee selectedEmployee = EmployeeDAL.GetEmployee(model.AssignedTo);
+            if (ModelState.IsValid && selectedEmployee.Hours > model.HoursNeeded)
             {
                 ToDoDAL.CreateToDo(model);
                 return RedirectToAction("Index", "ToDo");
             }
 
+            ViewData["Employees"] = EmployeeDAL.GetEmployees();
+            ViewData["ErrorMessage"] = "This employee doesn't have enough Hours";
             return View(model);
         }
 
@@ -74,6 +77,20 @@ namespace DevBuildToDoLab.Controllers
             Employee updateHoursForEmployee = EmployeeDAL.GetEmployee(model.AssignedTo);
             updateHoursForEmployee.Hours -= model.HoursNeeded;
             EmployeeDAL.UpdateUser(updateHoursForEmployee);
+            return RedirectToAction("Index", "ToDo");
+        }
+
+        public IActionResult MarkComplete(int id)
+        {
+            ToDo toDoModel = ToDoDAL.GetToDo(id);
+            if (toDoModel.AssignedTo != 0)
+            {
+                Employee employeeToUpdateHours = EmployeeDAL.GetEmployee(toDoModel.AssignedTo);
+
+                EmployeeDAL.ToDoComplete(id, toDoModel.HoursNeeded + employeeToUpdateHours.Hours);
+            }
+            
+            ToDoDAL.MarkComplete(id);
             return RedirectToAction("Index", "ToDo");
         }
     }

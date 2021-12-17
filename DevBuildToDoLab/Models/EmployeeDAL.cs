@@ -87,5 +87,16 @@ namespace DevBuildToDoLab.Models
                 connect.Close();
             }
         }
+
+        public void ToDoComplete(int id, int hours)
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"UPDATE Employee SET Hours = {hours} WHERE EmployeeID = {id}";
+                connect.Open();
+                connect.Query(sql);
+                connect.Close();
+            }
+        }
     }
 }

@@ -33,7 +33,8 @@
         <p>
             <a asp-controller="ToDo" asp-action="AssignToDo" asp-route-id="@task.ID">Re-Assign</a> |
             <a asp-controller="ToDo" asp-action="UpdateToDo" asp-route-id="@task.ID">Update</a> |
-            <a asp-controller="ToDo" asp-action="DeleteToDo" asp-route-id="@task.ID">Delete</a>
+            <a asp-controller="ToDo" asp-action="DeleteToDo" asp-route-id="@task.ID">Delete</a> |
+            <a asp-controller="ToDo" asp-action="MarkComplete" asp-route-id="@task.ID">Mark Complete</a>
         </p>
     }
     else
@@ -41,7 +42,8 @@
         <p>
             <a asp-controller="ToDo" asp-action="AssignToDo" asp-route-id="@task.ID">Assign</a> |
             <a asp-controller="ToDo" asp-action="UpdateToDo" asp-route-id="@task.ID">Update</a> |
-            <a asp-controller="ToDo" asp-action="DeleteToDo" asp-route-id="@task.ID">Delete</a>
+            <a asp-controller="ToDo" asp-action="DeleteToDo" asp-route-id="@task.ID">Delete</a> |
+            <a asp-controller="ToDo" asp-action="MarkComplete" asp-route-id="@task.ID">Mark Complete</a>
         </p>
     }
 </div>

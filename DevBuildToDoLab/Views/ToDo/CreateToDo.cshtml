@@ -1,5 +1,8 @@
 ﻿@model ToDo
-
+@{ 
+    List<Employee> employees = ViewData["Employees"] as List<Employee>;
+    string errorMessage = ViewData["ErrorMessage"] as string;
+}
 @using (Html.BeginForm("CreateToDo", "ToDo", FormMethod.Post))
 {
     @Html.LabelFor(todo => todo.Name)
@@ -17,5 +20,19 @@
 
     <br />
 
-    <input type="submit" value="Submit"/>
+    <label for="AssignedTo">Assign to: </label>
+    <select name="AssignedTo">
+        <option value="0"></option>
+        @foreach (Employee em in employees)
+        {
+                <option value="@em.EmployeeID">@em.Name</option>
+        }
+    </select>
+    @if (errorMessage != null || errorMessage != string.Empty) 
+    { 
+        <p>@errorMessage</p>
+    }
+    <br />
+
+    <input type="submit" value="Submit" />
 }

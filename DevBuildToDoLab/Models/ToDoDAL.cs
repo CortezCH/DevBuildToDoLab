@@ -52,7 +52,7 @@ namespace DevBuildToDoLab.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection))
             {
-                string sql = $"INSERT INTO ToDos values(0, null, '{model.Name}', '{model.Description}', {model.HoursNeeded}, {model.IsComplete})";
+                string sql = $"INSERT INTO ToDos values({model.ID}, {model.AssignedTo}, '{model.Name}', '{model.Description}', {model.HoursNeeded}, {model.IsComplete})";
                 connect.Open();
                 connect.Query<ToDo>(sql);
                 connect.Close();
@@ -93,6 +93,17 @@ namespace DevBuildToDoLab.Models
                 string sql = $"UPDATE ToDos SET AssignedTo = {model.AssignedTo}";
                 connect.Open();
                 connect.Query<ToDo>(sql);
+                connect.Close();
+            }
+        }
+
+        public void MarkComplete(int id)
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"UPDATE ToDos SET AssignedTo = null, IsComplete = 1 WHERE ID = {id}";
+                connect.Open();
+                connect.Query(sql);
                 connect.Close();
             }
         }
